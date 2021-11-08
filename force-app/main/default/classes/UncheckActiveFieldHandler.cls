@@ -10,8 +10,8 @@ public with sharing class UncheckActiveFieldHandler {
         }
         
         //Get these accounts with associated orders
-        List<Account> accList = new List<Account> ([SELECT Id, Active__c, (SELECT Id FROM orders)
-                                                       FROM Account WHERE Id IN :accIds]);
+        List<Account> accList = [SELECT Id, Active__c, (SELECT Id FROM orders)
+                                                        FROM Account WHERE Id IN :accIds];
 
         // Check if accounts have at least one associated order, if not uncheck the Active__c field
         if(accList.size() > 0) {
